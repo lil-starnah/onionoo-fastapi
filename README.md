@@ -36,6 +36,32 @@ OpenAPI docs:
 - Swagger UI: `http://localhost:8000/docs`
 - OpenAPI JSON: `http://localhost:8000/openapi.json`
 
+## Docker
+
+Build and run with Docker Compose:
+
+```bash
+docker compose up -d --build
+```
+
+If port 8000 is already in use, override host port (example: 8001):
+
+```bash
+HOST_PORT=8001 docker compose up -d --build
+```
+
+Stop:
+
+```bash
+docker compose down
+```
+
+Configuration via environment variables (example):
+
+```bash
+ONIONOO_BASE_URL=https://onionoo.torproject.org HOST_PORT=8001 docker compose up -d --build
+```
+
 ## API
 
 This service exposes semantic endpoints under `/v1/*`:

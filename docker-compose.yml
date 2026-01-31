@@ -1,0 +1,21 @@
+services:
+  onionoo-fastapi:
+    build: .
+    image: onionoo-fastapi:latest
+    ports:
+      - "${HOST_PORT:-8000}:8000"
+    environment:
+      ONIONOO_BASE_URL: "https://onionoo.torproject.org"
+    restart: unless-stopped
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/healthz').read()",
+        ]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
