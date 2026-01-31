@@ -10,7 +10,17 @@ from app.services.onionoo_client import OnionooClient
 router = APIRouter()
 
 
-@router.get("/clients", response_model=ClientsResponse)
+@router.get(
+    "/clients",
+    response_model=ClientsResponse,
+    summary="Get bridge clients history",
+    description=(
+        "Proxies Onionoo `/clients`.\n\n"
+        "- Upstream: `GET https://onionoo.torproject.org/clients`\n"
+        "- Returns estimated daily number of clients connecting to a bridge (bridges only).\n\n"
+        "Spec: https://metrics.torproject.org/onionoo.html"
+    ),
+)
 async def get_clients(
     request: Request,
     response: Response,

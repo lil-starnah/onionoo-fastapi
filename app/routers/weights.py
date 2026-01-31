@@ -10,7 +10,17 @@ from app.services.onionoo_client import OnionooClient
 router = APIRouter()
 
 
-@router.get("/weights", response_model=WeightsResponse)
+@router.get(
+    "/weights",
+    response_model=WeightsResponse,
+    summary="Get relay weights history",
+    description=(
+        "Proxies Onionoo `/weights`.\n\n"
+        "- Upstream: `GET https://onionoo.torproject.org/weights`\n"
+        "- Returns path-selection probability/weight histories (relays only).\n\n"
+        "Spec: https://metrics.torproject.org/onionoo.html"
+    ),
+)
 async def get_weights(
     request: Request,
     response: Response,

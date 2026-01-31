@@ -14,8 +14,17 @@ class ClientsBridge(BaseModel):
 
     model_config = ConfigDict(extra="allow")
 
-    hashed_fingerprint: str = Field(validation_alias="fingerprint")
-    average_clients: dict[str, GraphHistory] | None = None
+    hashed_fingerprint: str = Field(
+        validation_alias="fingerprint",
+        description="SHA-1 hash of the bridge fingerprint (40 upper-case hexadecimal characters).",
+    )
+    average_clients: dict[str, GraphHistory] | None = Field(
+        default=None,
+        description=(
+            "History of estimated average number of clients per day. "
+            "Keys: 1_month, 6_months, 1_year, 5_years."
+        ),
+    )
 
 
 class ClientsResponse(OnionooEnvelope[EmptyRelay, ClientsBridge]):

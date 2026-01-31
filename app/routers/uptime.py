@@ -10,7 +10,17 @@ from app.services.onionoo_client import OnionooClient
 router = APIRouter()
 
 
-@router.get("/uptime", response_model=UptimeResponse)
+@router.get(
+    "/uptime",
+    response_model=UptimeResponse,
+    summary="Get uptime history",
+    description=(
+        "Proxies Onionoo `/uptime`.\n\n"
+        "- Upstream: `GET https://onionoo.torproject.org/uptime`\n"
+        "- Returns fractional uptimes of relays and bridges.\n\n"
+        "Spec: https://metrics.torproject.org/onionoo.html"
+    ),
+)
 async def get_uptime(
     request: Request,
     response: Response,

@@ -9,9 +9,22 @@ from app.models.history import GraphHistory
 class UptimeRelay(BaseModel):
     model_config = ConfigDict(extra="allow")
 
-    fingerprint: str
-    uptime: dict[str, GraphHistory] | None = None
-    flags: dict[str, dict[str, GraphHistory]] | None = None
+    fingerprint: str = Field(
+        description="Relay fingerprint (40 upper-case hexadecimal characters)."
+    )
+    uptime: dict[str, GraphHistory] | None = Field(
+        default=None,
+        description=(
+            "History of fractional uptime (0..1). Keys: 1_month, 6_months, 1_year, 5_years."
+        ),
+    )
+    flags: dict[str, dict[str, GraphHistory]] | None = Field(
+        default=None,
+        description=(
+            "Per-flag fractional times assigned. Outer keys: flag names (e.g. 'Running', 'Exit'). "
+            "Inner keys: time ranges."
+        ),
+    )
 
 
 class UptimeBridge(BaseModel):
@@ -21,8 +34,16 @@ class UptimeBridge(BaseModel):
 
     model_config = ConfigDict(extra="allow")
 
-    hashed_fingerprint: str = Field(validation_alias="fingerprint")
-    uptime: dict[str, GraphHistory] | None = None
+    hashed_fingerprint: str = Field(
+        validation_alias="fingerprint",
+        description="SHA-1 hash of the bridge fingerprint (40 upper-case hexadecimal characters).",
+    )
+    uptime: dict[str, GraphHistory] | None = Field(
+        default=None,
+        description=(
+            "History of fractional uptime (0..1). Keys: 1_month, 6_months, 1_year, 5_years."
+        ),
+    )
 
 
 class UptimeResponse(OnionooEnvelope[UptimeRelay, UptimeBridge]):

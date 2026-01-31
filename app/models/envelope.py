@@ -17,16 +17,34 @@ class OnionooEnvelope(BaseModel, Generic[RelayT, BridgeT]):
 
     model_config = ConfigDict(extra="allow")
 
-    version: str
-    next_major_version_scheduled: str | None = None
-    build_revision: str | None = None
+    version: str = Field(description="Onionoo protocol version string (major.minor).")
+    next_major_version_scheduled: str | None = Field(
+        default=None,
+        description="UTC date (YYYY-MM-DD) when the next major protocol version is scheduled.",
+    )
+    build_revision: str | None = Field(
+        default=None,
+        description="Git revision of the Onionoo instance's software (if provided by upstream).",
+    )
 
-    relays_published: str
-    relays_skipped: int | None = None
-    relays_truncated: int | None = None
-    relays: list[RelayT] = Field(default_factory=list)
+    relays_published: str = Field(
+        description="UTC timestamp (YYYY-MM-DD hh:mm:ss) when the relay consensus started being valid."
+    )
+    relays_skipped: int | None = Field(
+        default=None, description="Number of relays skipped due to offset (if non-zero)."
+    )
+    relays_truncated: int | None = Field(
+        default=None, description="Number of relays truncated due to limit (if non-zero)."
+    )
+    relays: list[RelayT] = Field(default_factory=list, description="Relay objects.")
 
-    bridges_published: str
-    bridges_skipped: int | None = None
-    bridges_truncated: int | None = None
-    bridges: list[BridgeT] = Field(default_factory=list)
+    bridges_published: str = Field(
+        description="UTC timestamp (YYYY-MM-DD hh:mm:ss) when the bridge status was published."
+    )
+    bridges_skipped: int | None = Field(
+        default=None, description="Number of bridges skipped due to offset (if non-zero)."
+    )
+    bridges_truncated: int | None = Field(
+        default=None, description="Number of bridges truncated due to limit (if non-zero)."
+    )
+    bridges: list[BridgeT] = Field(default_factory=list, description="Bridge objects.")

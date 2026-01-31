@@ -10,7 +10,17 @@ from app.services.onionoo_client import OnionooClient
 router = APIRouter()
 
 
-@router.get("/bandwidth", response_model=BandwidthResponse)
+@router.get(
+    "/bandwidth",
+    response_model=BandwidthResponse,
+    summary="Get bandwidth history",
+    description=(
+        "Proxies Onionoo `/bandwidth`.\n\n"
+        "- Upstream: `GET https://onionoo.torproject.org/bandwidth`\n"
+        "- Returns aggregate bandwidth histories for relays and bridges.\n\n"
+        "Spec: https://metrics.torproject.org/onionoo.html"
+    ),
+)
 async def get_bandwidth(
     request: Request,
     response: Response,

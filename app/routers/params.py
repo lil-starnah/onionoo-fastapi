@@ -11,24 +11,140 @@ def _bool_str(v: bool) -> str:
 
 
 def common_query_params(
-    type: Annotated[str | None, Query(description="relay or bridge")] = None,
-    running: Annotated[bool | None, Query(description="true or false")] = None,
-    search: Annotated[str | None, Query()] = None,
-    lookup: Annotated[str | None, Query()] = None,
-    country: Annotated[str | None, Query()] = None,
-    as_: Annotated[str | None, Query(alias="as")] = None,
-    as_name: Annotated[str | None, Query()] = None,
-    flag: Annotated[str | None, Query()] = None,
-    first_seen_days: Annotated[str | None, Query()] = None,
-    last_seen_days: Annotated[str | None, Query()] = None,
-    first_seen_since: Annotated[date | None, Query()] = None,
-    last_seen_since: Annotated[date | None, Query()] = None,
-    version: Annotated[str | None, Query()] = None,
-    os: Annotated[str | None, Query()] = None,
-    recommended_version: Annotated[bool | None, Query()] = None,
-    order: Annotated[str | None, Query()] = None,
-    offset: Annotated[int | None, Query(ge=0)] = None,
-    limit: Annotated[int | None, Query(ge=0)] = None,
+    type: Annotated[
+        str | None,
+        Query(
+            description="Return only relay ('relay') or only bridge ('bridge') documents.",
+        ),
+    ] = None,
+    running: Annotated[
+        bool | None,
+        Query(
+            description="Return only running relays/bridges (true) or only non-running (false).",
+        ),
+    ] = None,
+    search: Annotated[
+        str | None,
+        Query(
+            description=(
+                "Search term. Matches (parts of) nicknames, fingerprint prefixes, IP prefixes, or "
+                "qualified terms like 'key:value'. Multiple terms (space-separated) are ANDed."
+            ),
+        ),
+    ] = None,
+    lookup: Annotated[
+        str | None,
+        Query(
+            description=(
+                "Lookup a specific relay/bridge by (hashed) fingerprint. Must be 40 hex chars. "
+                "Case-insensitive."
+            ),
+        ),
+    ] = None,
+    country: Annotated[
+        str | None,
+        Query(description="Filter relays by 2-letter country code (case-insensitive)."),
+    ] = None,
+    as_: Annotated[
+        str | None,
+        Query(
+            alias="as",
+            description=(
+                "Filter relays by autonomous system number (e.g. 'AS1234' or '1234'). "
+                "Supports comma-separated lists."
+            ),
+        ),
+    ] = None,
+    as_name: Annotated[
+        str | None,
+        Query(description="Filter relays by (part of) autonomous system name (case-insensitive)."),
+    ] = None,
+    flag: Annotated[
+        str | None,
+        Query(description="Filter relays by a directory authority flag (case-insensitive)."),
+    ] = None,
+    contact: Annotated[
+        str | None,
+        Query(description="Filter relays by (part of) contact line (case-insensitive)."),
+    ] = None,
+    family: Annotated[
+        str | None,
+        Query(
+            description=(
+                "Filter relays by mutual family relationship for the given relay fingerprint "
+                "(40 hex chars, NOT hashed)."
+            ),
+        ),
+    ] = None,
+    host_name: Annotated[
+        str | None,
+        Query(
+            description=(
+                "Filter relays by reverse DNS host name suffix (case-insensitive). "
+                "For subdomains, prefix with '.' (e.g. '.example.org')."
+            ),
+        ),
+    ] = None,
+    first_seen_days: Annotated[
+        str | None,
+        Query(
+            description=(
+                "Filter by range of days ago the relay/bridge was first seen. "
+                "Forms: 'x-y', 'x', 'x-', or '-y'."
+            ),
+        ),
+    ] = None,
+    last_seen_days: Annotated[
+        str | None,
+        Query(
+            description=(
+                "Filter by range of days ago the relay/bridge was last seen. "
+                "Forms: 'x-y', 'x', 'x-', or '-y'."
+            ),
+        ),
+    ] = None,
+    first_seen_since: Annotated[
+        date | None,
+        Query(description="Filter by first seen after date (YYYY-MM-DD)."),
+    ] = None,
+    last_seen_since: Annotated[
+        date | None,
+        Query(description="Filter by last seen after date (YYYY-MM-DD)."),
+    ] = None,
+    version: Annotated[
+        str | None,
+        Query(
+            description=(
+                "Filter by Tor version without leading 'Tor'. Supports lists and ranges "
+                "('x,y' or 'x..y' or mixed)."
+            ),
+        ),
+    ] = None,
+    os: Annotated[
+        str | None,
+        Query(description="Filter by operating system prefix (case-insensitive)."),
+    ] = None,
+    recommended_version: Annotated[
+        bool | None,
+        Query(description="Filter by whether the Tor version is recommended by authorities."),
+    ] = None,
+    order: Annotated[
+        str | None,
+        Query(
+            description=(
+                "Order results by comma-separated fields. Supported fields include "
+                "'consensus_weight' and 'first_seen'. Prefix with '-' for descending."
+            ),
+        ),
+    ] = None,
+    offset: Annotated[
+        int | None,
+        Query(ge=0, description="Skip the given number of relays/bridges (relays first)."),
+    ] = None,
+    limit: Annotated[
+        int | None,
+        Query(ge=0, description="Limit number of relays/bridges returned (relays first)."),
+    ] = None,
 ) -> dict[str, Any]:
     """
     Common Onionoo query parameters (documented in Onionoo spec).
@@ -53,6 +169,12 @@ def common_query_params(
         params["as_name"] = as_name
     if flag is not None:
         params["flag"] = flag
+    if contact is not None:
+        params["contact"] = contact
+    if family is not None:
+        params["family"] = family
+    if host_name is not None:
+        params["host_name"] = host_name
     if first_seen_days is not None:
         params["first_seen_days"] = first_seen_days
     if last_seen_days is not None:

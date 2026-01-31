@@ -14,10 +14,25 @@ class SummaryRelay(BaseModel):
 
     model_config = ConfigDict(extra="allow")
 
-    nickname: str = Field(validation_alias="n")
-    fingerprint: str = Field(validation_alias="f")
-    addresses: list[str] = Field(validation_alias="a")
-    running: bool = Field(validation_alias="r")
+    nickname: str = Field(
+        validation_alias="n",
+        description="Relay nickname (1–19 alphanumerical characters).",
+    )
+    fingerprint: str = Field(
+        validation_alias="f",
+        description="Relay fingerprint (40 upper-case hexadecimal characters).",
+    )
+    addresses: list[str] = Field(
+        validation_alias="a",
+        description=(
+            "IPv4/IPv6 addresses where the relay accepts onion-routing connections (or used to exit "
+            "in the past 24 hours)."
+        ),
+    )
+    running: bool = Field(
+        validation_alias="r",
+        description="Whether this relay was listed as Running in the last consensus.",
+    )
 
 
 class SummaryBridge(BaseModel):
@@ -29,9 +44,18 @@ class SummaryBridge(BaseModel):
 
     model_config = ConfigDict(extra="allow")
 
-    nickname: str = Field(validation_alias="n")
-    hashed_fingerprint: str = Field(validation_alias="h")
-    running: bool = Field(validation_alias="r")
+    nickname: str = Field(
+        validation_alias="n",
+        description="Bridge nickname (1–19 alphanumerical characters).",
+    )
+    hashed_fingerprint: str = Field(
+        validation_alias="h",
+        description="SHA-1 hash of the bridge fingerprint (40 upper-case hexadecimal characters).",
+    )
+    running: bool = Field(
+        validation_alias="r",
+        description="Whether this bridge was successfully tested (or listed as running if untested).",
+    )
 
 
 class SummaryResponse(OnionooEnvelope[SummaryRelay, SummaryBridge]):
