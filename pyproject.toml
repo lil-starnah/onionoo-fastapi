@@ -4,6 +4,7 @@ version = "0.1.0"
 description = "FastAPI-based semantic/OpenAPI proxy for Tor Onionoo."
 readme = "README.md"
 requires-python = ">=3.11"
+license = { file = "LICENSE" }
 dependencies = [
   "fastapi[standard]>=0.110",
   "httpx>=0.27",
@@ -11,6 +12,10 @@ dependencies = [
   "ruff>=0.6",
   "uvicorn[standard]>=0.27",
 ]
+
+[project.urls]
+Repository = "https://github.com/anoni-net/onionoo-fastapi"
+Issues = "https://github.com/anoni-net/onionoo-fastapi/issues"
 
 [tool.ruff]
 line-length = 100

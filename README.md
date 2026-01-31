@@ -2,6 +2,7 @@
 
 FastAPI-based **semantic/OpenAPI proxy** for the Tor **Onionoo** API.
 
+- GitHub: <https://github.com/anoni-net/onionoo-fastapi>
 - Upstream data source: <https://onionoo.torproject.org>
 - This service **does not store Onionoo data**, it only forwards requests and transforms responses.
 - Primary motivation: Onionoo has a solid spec, but **no OpenAPI**; this service provides a friendly schema **for tooling/AI agents**.
@@ -18,6 +19,14 @@ MIT. See `LICENSE`.
 - [`uv`](https://docs.astral.sh/uv/)
 
 ## Install
+
+```bash
+git clone https://github.com/anoni-net/onionoo-fastapi
+cd onionoo-fastapi
+uv sync
+```
+
+Or if you already have the source:
 
 ```bash
 cd onionoo-fastapi

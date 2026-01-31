@@ -6,7 +6,7 @@ class Settings(BaseSettings):
 
     onionoo_base_url: str = "https://onionoo.torproject.org"
     onionoo_timeout_seconds: float = 30.0
-    user_agent: str = "onionoo-fastapi/0.1 (+https://metrics.torproject.org/onionoo.html)"
+    user_agent: str = "onionoo-fastapi/0.1 (+https://github.com/anoni-net/onionoo-fastapi)"
 
 
 settings = Settings()
