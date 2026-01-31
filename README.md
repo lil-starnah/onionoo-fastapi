@@ -9,6 +9,11 @@ FastAPI-based **semantic/OpenAPI proxy** for the Tor **Onionoo** API.
 
 Reference spec: [Tor Metrics – Onionoo](https://metrics.torproject.org/onionoo.html)
 
+## Hosted instance
+
+- Service: `https://onionoo.anoni.net`
+- Swagger UI: `https://onionoo.anoni.net/docs`
+
 ## License
 
 MIT. See `LICENSE`.
