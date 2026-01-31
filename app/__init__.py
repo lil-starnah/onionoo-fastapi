@@ -1,0 +1,1 @@
+"""onionoo-fastapi package."""
