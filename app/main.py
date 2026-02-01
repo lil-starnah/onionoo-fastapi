@@ -2,6 +2,7 @@ from contextlib import asynccontextmanager
 
 import httpx
 from fastapi import FastAPI, Request, Response
+from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import JSONResponse
 
 from app.routers import bandwidth, clients, details, summary, uptime, weights
@@ -23,6 +24,9 @@ def create_app() -> FastAPI:
         description="Semantic/OpenAPI proxy for Tor Onionoo (data is fetched from Onionoo upstream).",
         lifespan=lifespan,
     )
+
+    # Add GZip compression middleware for responses larger than 1KB
+    app.add_middleware(GZipMiddleware, minimum_size=1000)
 
     @app.get("/healthz", tags=["health"])
     async def healthz() -> dict[str, str]:
