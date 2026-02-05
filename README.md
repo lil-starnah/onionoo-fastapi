@@ -50,6 +50,13 @@ OpenAPI docs:
 - Swagger UI: `http://localhost:8000/docs`
 - OpenAPI JSON: `http://localhost:8000/openapi.json`
 
+## Test
+
+```bash
+uv sync --extra dev
+uv run pytest
+```
+
 ## Docker
 
 Build and run with Docker Compose:
@@ -127,4 +134,8 @@ If the client includes `If-Modified-Since`, it will be forwarded upstream. If On
 ### Configuration
 
 - `ONIONOO_BASE_URL` (default: `https://onionoo.torproject.org`)
+- `ONIONOO_TIMEOUT_SECONDS` (default: `30`)
+- `DEFAULT_LIMIT` (default: `100`)
+- `MAX_LIMIT` (default: `200`)
+- `USER_AGENT`
 

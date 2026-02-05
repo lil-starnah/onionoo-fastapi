@@ -5,6 +5,8 @@ from typing import Annotated, Any
 
 from fastapi import Query
 
+from app.settings import settings
+
 
 def _bool_str(v: bool) -> str:
     return "true" if v else "false"
@@ -142,9 +144,16 @@ def common_query_params(
         Query(ge=0, description="Skip the given number of relays/bridges (relays first)."),
     ] = None,
     limit: Annotated[
-        int | None,
-        Query(ge=0, description="Limit number of relays/bridges returned (relays first)."),
-    ] = None,
+        int,
+        Query(
+            ge=0,
+            le=settings.max_limit,
+            description=(
+                f"Limit number of relays/bridges returned (relays first). "
+                f"Default: {settings.default_limit}, max: {settings.max_limit}."
+            ),
+        ),
+    ] = settings.default_limit
 ) -> dict[str, Any]:
     """
     Common Onionoo query parameters (documented in Onionoo spec).
@@ -153,6 +162,7 @@ def common_query_params(
     """
 
     params: dict[str, Any] = {}
+
     if type is not None:
         params["type"] = type
     if running is not None:
@@ -193,6 +203,5 @@ def common_query_params(
         params["order"] = order
     if offset is not None:
         params["offset"] = str(offset)
-    if limit is not None:
-        params["limit"] = str(limit)
+    params["limit"] = str(limit)
     return params
