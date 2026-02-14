@@ -20,8 +20,8 @@ MIT. See `LICENSE`.
 
 ## Requirements
 
-- Python 3.11+
-- [`uv`](https://docs.astral.sh/uv/)
+- Python 3.12+
+- [`uv`](https://docs.astral.sh/uv/) (for Cloudflare Workers: uv 0.8.10+)
 
 ## Install
 
@@ -31,19 +31,19 @@ cd onionoo-fastapi
 uv sync
 ```
 
-Or if you already have the source:
+For running the server locally (uvicorn) or with Docker, add the server extra:
 
 ```bash
-cd onionoo-fastapi
-uv sync
+uv sync --extra server
 ```
 
 ## Run
 
 ```bash
+uv sync --extra server
 fastapi run app.main:app --reload --host 0.0.0.0 --port 8000
 ```
-**Note:** `fastapi run` requires FastAPI version 0.110.0 or newer.
+**Note:** `fastapi run` requires FastAPI 0.110+ and the `server` extra (uvicorn).
 
 OpenAPI docs:
 
@@ -56,6 +56,37 @@ OpenAPI docs:
 uv sync --extra dev
 uv run pytest
 ```
+
+## Deploy to Cloudflare Workers
+
+This app can run on [Cloudflare Workers](https://workers.cloudflare.com/) (Python Workers, open beta). Same codebase as uvicorn/Docker; the Worker entrypoint is `worker.py`.
+
+**Setup**
+
+- Install the Workers CLI: `uv tool install workers-py` (requires Node.js and uv 0.8.10+).
+- Ensure `wrangler.toml` exists (see repo); run `uv run pywrangler init` if you need to regenerate it.
+
+**Configuration**
+
+- Set env in `wrangler.toml` under `[vars]` (e.g. `ONIONOO_BASE_URL`, `DEFAULT_LIMIT`, `MAX_LIMIT`) or via [Secrets](https://developers.cloudflare.com/workers/configuration/secrets/) in the dashboard.
+- The app reads config from the environment (Workers inject vars/secrets into the runtime).
+
+**Local**
+
+```bash
+uv sync --extra dev
+uv run pywrangler dev
+```
+
+**Deploy**
+
+```bash
+uv run pywrangler deploy
+```
+
+Python Workers are in **open beta** and require the `python_workers` (and optionally `python_dedicated_snapshot`) compatibility flags in `wrangler.toml`.
+
+**Note (local dev):** When running `pywrangler dev`, the second request to the same or another endpoint can be much slower than the first (tens of seconds). This is due to the Workers/Pyodide runtime: the next request is not processed until the previous response has finished being sent. Deployed Workers on Cloudflare’s edge do not show this behavior.
 
 ## Docker
 

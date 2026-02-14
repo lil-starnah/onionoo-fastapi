@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import hashlib
+import sys
 import time
 from collections.abc import Mapping
 from dataclasses import dataclass
@@ -10,6 +11,10 @@ from typing import Any
 import httpx
 
 from app.settings import settings
+
+# In Pyodide (Cloudflare Workers), fetch 304 responses have body=null; httpx jsfetch
+# does not handle that and raises. Avoid 304 by not sending If-Modified-Since.
+_IS_PYODIDE = "pyodide" in sys.modules
 
 
 class UpstreamError(RuntimeError):
@@ -106,7 +111,7 @@ class OnionooClient:
         # Create new request
         url_path = f"/{method.lstrip('/')}"
         headers: dict[str, str] = {}
-        if if_modified_since:
+        if if_modified_since and not _IS_PYODIDE:
             headers["If-Modified-Since"] = if_modified_since
 
         # Create future for deduplication

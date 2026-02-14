@@ -1,0 +1,10 @@
+name = "onionoo-fastapi"
+main = "worker.py"
+compatibility_date = "2025-11-02"
+compatibility_flags = ["python_workers", "python_dedicated_snapshot"]
+
+[vars]
+# Optional: override defaults (also set via Secrets in dashboard)
+# ONIONOO_BASE_URL = "https://onionoo.torproject.org"
+# DEFAULT_LIMIT = "100"
+# MAX_LIMIT = "200"

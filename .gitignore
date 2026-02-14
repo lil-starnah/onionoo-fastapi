@@ -5,8 +5,13 @@ __pycache__/
 
 # Virtual environments
 .venv/
+.venv-workers/
 venv/
 .envrc
+
+# Installed dependencies (restore with uv sync / npm install)
+python_modules/
+node_modules/
 
 # Environment variables / secrets
 .env
