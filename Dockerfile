@@ -17,7 +17,7 @@ RUN curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # Install dependencies first (better layer caching)
 COPY pyproject.toml uv.lock /app/
-RUN /root/.local/bin/uv sync --frozen --extra server
+RUN /root/.local/bin/uv sync --frozen
 
 # Copy application code
 COPY app /app/app

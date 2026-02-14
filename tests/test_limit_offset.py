@@ -7,7 +7,7 @@ from app.main import app
 
 @pytest.fixture
 def client() -> TestClient:
-    """Use context manager so ASGI app is run correctly."""
+    """Use context manager so lifespan runs and app.state.onionoo is set."""
     with TestClient(app) as c:
         yield c
 

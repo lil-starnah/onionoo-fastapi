@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from collections.abc import AsyncGenerator
 from typing import Any, TypeVar
 
 from fastapi import HTTPException, Request, Response
@@ -11,13 +10,8 @@ from app.services.onionoo_client import OnionooClient
 ModelT = TypeVar("ModelT", bound=BaseModel)
 
 
-async def get_onionoo_client() -> AsyncGenerator[OnionooClient, None]:
-    """Request-scoped Onionoo client (create per request, close after)."""
-    client = OnionooClient()
-    try:
-        yield client
-    finally:
-        await client.aclose()
+def get_onionoo_client(request: Request) -> OnionooClient:
+    return request.app.state.onionoo
 
 
 async def proxy_get_json(

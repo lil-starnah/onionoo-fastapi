@@ -12,7 +12,7 @@ def _bool_str(v: bool) -> str:
     return "true" if v else "false"
 
 
-async def common_query_params(
+def common_query_params(
     type: Annotated[
         str | None,
         Query(
